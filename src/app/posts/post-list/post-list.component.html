@@ -1,0 +1,33 @@
+<!-- <mat-accordion>
+    <mat-expansion-panel *ngFor="let post of posts">
+        <mat-expansion-panel-header>
+            {{post.content}}
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion> -->
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+        <app-post-edit></app-post-edit>
+
+<div *ngIf="posts.length > 0 && !isLoading" >
+    <mat-list  *ngFor="let post of posts ;let i = index">
+        <div >
+            <!-- <mat-list-item  (dblclick)="doubleClick(post.id)" >{{post.content}} </mat-list-item> -->
+            <mat-list-item (dblclick)="doubleClick(i)" >{{post.content}} </mat-list-item>
+        </div>
+        <!-- <mat-action-list *ngIf="onClicked">
+            <button mat-button color="accent" (click)="onEdit(i)"> EDIT </button>
+            <button mat-button color="primary" (click)="undo()"> DELETE </button>
+        </mat-action-list>
+      </mat-list> -->
+
+      <mat-action-list *ngIf="onClicked && i == itemClicked">
+
+            <a mat-button color="accent" (click)="onEdit(post.id)" [routerLink]="['/edit',post.id ]"> EDIT </a>
+            <button mat-button color="warn" (click)="onDelete(post.id)"> Delete </button>
+
+        </mat-action-list>
+      </mat-list>
+</div>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No post added</p>
+

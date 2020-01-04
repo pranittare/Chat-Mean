@@ -1,0 +1,13 @@
+
+mat-form-field,
+textarea{
+    width: 100%;
+}
+div.sticky {
+    position: sticky;
+    width: 100%;
+    bottom: 10px;
+}
+mat-spinner {
+    margin: auto;
+}
