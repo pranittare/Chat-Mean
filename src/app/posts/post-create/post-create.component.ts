@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { PostsService } from '../posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post-create',
@@ -11,13 +12,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  
+  form: NgForm;
   enteredContent = '';
   post: Post;
   isLoading = false;
   private mode = 'create';
   private postId: string;
   selectedFile = null
+  subscription: Subscription
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Post;
  
  
   constructor(public postsService: PostsService, public route: ActivatedRoute, private http: HttpClient) { }
@@ -25,39 +30,68 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) =>{
       if (paramMap.has('postId')) {
+        console.log("true")
+        this.form.setValue({
+            
+          content: this.post.content
+        });
+        console.log(this.form.value)
+        this.editMode = true;
         this.mode = 'edit'
+
         this.postId = paramMap.get('postId')
         //fetching
         this.isLoading = true;
 
-        console.log('post create')
+        console.log(this.mode)
+        // this.post = this.postsService.getPost(this.postId)
 
         this.postsService.getPost(this.postId).subscribe(postData =>{
-          //result
           this.isLoading = false;
-
-          this.post = {id: postData._id, content: postData.content}
+          this.post = {
+            id: postData._id, 
+            
+            content: postData.content, 
+            
+            
+          }
+          this.form.setValue({
+            
+          content: this.post.content
+          
         });
-      } else {
+        });
+      } 
+       else {
+        this.editMode = false;
         this.mode = 'create'
         this.postId = null;
 
       }
     });
   }
-
+  
   onSavePost(form: NgForm) {
     if (form.invalid) {
       return
     }
     this.isLoading = true;
+    console.log(this.mode)
+
 
     if (this.mode === 'create') { 
-    this.postsService.addPost(form.value.content);
+      console.log(this.mode)
+
+    this.postsService.addPost(this.form.value.content);
       
-    } else {
-      this.postsService.updatePost(this.postId, form.value.content )
-    }
+    } else  {
+      this.mode === 'edit'
+      console.log(this.mode)
+  
+      this.postsService.updatePost(this.postId, this.form.value.content )
+      
+    } 
+    
     this.isLoading = false;
 
     form.resetForm()
@@ -70,3 +104,4 @@ export class PostCreateComponent implements OnInit {
   }
 
 }
+  

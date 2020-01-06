@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 export class PostsService {
 
  private posts: Post[] = [];
+ private posts1: Post[] = [
+  //  new Post('', '')
+ ] 
+ startedEditing = new Subject<any>();
  private postsUpdated = new Subject<Post[]>();
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -63,17 +67,24 @@ export class PostsService {
     this.http.put('http://localhost:3000/api/posts/' + id, post)
       .subscribe(response => {
         console.log(response)
-          const updatedPosts = [...this.posts];
-          const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id)
-          updatedPosts[oldPostIndex] = post;
-          this.posts = updatedPosts;
-          this.postsUpdated.next([...this.posts]);
+          // const updatedPosts = [...this.posts];
+          // const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id)
+          // updatedPosts[oldPostIndex] = post;
+          // this.posts = updatedPosts;
+          // console.log(content)
+
+          // this.postsUpdated.next([...this.posts]);
           this.router.navigate(['/']);
 
         }
         );
 
   }
+  // updatePost(id: string, newPost:Post) {
+  // this.posts1[id] = newPost;
+  // this.postsUpdated.next(this.posts1.slice());
+
+  // }
 
   deletePost(postId: string) {
     this.http.delete('http://localhost:3000/api/posts/'+ postId )
