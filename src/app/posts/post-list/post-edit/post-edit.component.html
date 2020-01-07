@@ -1,7 +1,14 @@
 <div *ngIf="editmode">
-    <form (ngSubmit)="onEditItem(f)" #f="ngForm">
+    <form (ngSubmit)="onEditItem(f)" #f="ngForm" >
+       
+        <mat-form-field class="example-full-width">
 
-            <input placeholder="Type Here" type="text" id="content" name="content" required ngModel>
-            <button class="btn btn-success" type="submit" [disabled]="!f.valid">Add</button>
-        </form>
+            <input matInput placeholder="Type Here" type="text" id="content" name="content" required ngModel>
+            
+            <br>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary"  type="submit" [disabled]="!f.valid">Update</button>
+            
+    </form>
 </div>

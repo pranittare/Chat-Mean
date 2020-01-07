@@ -30,6 +30,7 @@ export class PostEditComponent implements OnInit {
         // const content = this.postService.getPost(this.editedItemIndex)
         this.postService.getPost(this.editedItemIndex)
         this.editmode = !this.editmode
+       
       }
     })
       }
