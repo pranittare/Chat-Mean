@@ -39,7 +39,7 @@ router.put('/:id',(req,res, next) =>{
     })
     Post.updateOne({_id: req.params.id}, post)
     .then(result =>{
-        console.log(result);
+        console.warn(result);
         res.status(200).json({message: "update Successful!"})
     })
 } )

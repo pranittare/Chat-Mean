@@ -8,8 +8,8 @@ import { PostEditComponent } from './posts/post-list/post-edit/post-edit.compone
 const routes: Routes = [
   {path: '', component: PostListComponent},
   {path: 'create', component: PostCreateComponent},
-  {path: 'edit/:postId', component: PostCreateComponent},
-
+  {path: 'edit/:postId', component: PostEditComponent },
+  
 
 ];
 

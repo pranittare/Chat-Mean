@@ -25,7 +25,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   private mode = 'create';
   postId: string;
  
-  constructor(public postsService: PostsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public postsService: PostsService) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -43,7 +43,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   doubleClick(index, post: string) {
     this.itemClicked = index
    this.onClicked = !this.onClicked
-    this.router.navigate(['/edit','postid'])
+    // this.router.navigate(['/edit','postid'])
     
     console.log(index);
     // console.dir(e)

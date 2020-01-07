@@ -30,11 +30,12 @@ export class PostCreateComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) =>{
       if (paramMap.has('postId')) {
-        console.log("true")
-        this.form.setValue({
+     
+        // console.log("true")
+        // this.form.setValue({
             
-          content: this.post.content
-        });
+        //   content: this.post.content
+        // });
         console.log(this.form.value)
         this.editMode = true;
         this.mode = 'edit'
@@ -55,11 +56,11 @@ export class PostCreateComponent implements OnInit {
             
             
           }
-          this.form.setValue({
+        //   this.form.setValue({
             
-          content: this.post.content
+        //   content: this.post.content
           
-        });
+        // });
         });
       } 
        else {
@@ -71,8 +72,9 @@ export class PostCreateComponent implements OnInit {
     });
   }
   
-  onSavePost(form: NgForm) {
-    if (form.invalid) {
+  onSavePost(postForm) {
+    console.log(postForm)
+    if (postForm.invalid) {
       return
     }
     this.isLoading = true;
@@ -82,19 +84,19 @@ export class PostCreateComponent implements OnInit {
     if (this.mode === 'create') { 
       console.log(this.mode)
 
-    this.postsService.addPost(this.form.value.content);
+    this.postsService.addPost(postForm.value.content);
       
     } else  {
       this.mode === 'edit'
       console.log(this.mode)
   
-      this.postsService.updatePost(this.postId, this.form.value.content )
+      this.postsService.updatePost(this.postId, postForm.value.content )
       
     } 
     
     this.isLoading = false;
 
-    form.resetForm()
+    postForm.resetForm()
   }
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];

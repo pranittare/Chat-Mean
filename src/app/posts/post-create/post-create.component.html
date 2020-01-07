@@ -1,29 +1,22 @@
 <div class="sticky">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-<mat-card>
-    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading"> 
-        <mat-form-field>
-            <input
-            matInput rows="2"
-            name="content" 
-            [ngModel]="post?.content"
-            required
-            minlength="1"
-            #content = "ngModel"
-            placeholder="Type Here"> <span class="spacer"></span>
-            <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
-            <mat-icon class="spacer" *ngIf="content.valid" (click)="fileInput.click()">import_export</mat-icon>           
-            <mat-error *ngIf="content.invalid"> Please enter Something </mat-error>
-        
-        </mat-form-field>
-        
-        <button 
-        mat-raised-button
-        color="accent"
-        type="submit">Send</button>
+    <mat-card>
+        <!-- <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading"> -->
+            <form (ngSubmit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
 
-    </form>
+            <mat-form-field>
+                <input matInput rows="2" name="content" [ngModel]="post?.content" required minlength="1"
+                    #content="ngModel" placeholder="Type Here"> <span class="spacer"></span>
+                <input type="file" style="display: none" (change)="onFileSelected($event)" #fileInput>
+                <mat-icon class="spacer" *ngIf="content.valid" (click)="fileInput.click()">import_export</mat-icon>
+                <mat-error *ngIf="content.invalid"> Please enter Something </mat-error>
 
-</mat-card>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" type="submit">Send</button>
+
+        </form>
+
+    </mat-card>
 </div>
