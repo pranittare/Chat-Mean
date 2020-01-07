@@ -1,7 +1,7 @@
 <div *ngIf="editmode">
     <form (ngSubmit)="onEditItem(f)" #f="ngForm">
 
-            <input placeholder="Type Here" type="text" id="chat" name="chat" required ngModel>
+            <input placeholder="Type Here" type="text" id="content" name="content" required ngModel>
             <button class="btn btn-success" type="submit" [disabled]="!f.valid">Add</button>
         </form>
 </div>

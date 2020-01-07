@@ -62,7 +62,7 @@ export class PostsService {
 
   }
   updatePost(id: string, content:string) {
-    const post: Post = {id: id, content: content.chat};
+    const post: Post = {id: id, content:content.content};
     this.http.put('http://localhost:3000/api/posts/' + id, post)
       .subscribe(response => {
         console.log(response)
@@ -72,7 +72,7 @@ export class PostsService {
           console.log(post)
 
           this.posts = updatedPosts;
-          console.log(content.chat)
+          console.log(content)
           
 
           this.postsUpdated.next([...this.posts]);
